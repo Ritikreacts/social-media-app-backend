@@ -1,0 +1,446 @@
+{
+	"info": {
+		"_postman_id": "4fd1a89e-4215-45d6-95aa-a0b0edb5b69d",
+		"name": "Social Media App APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26415131"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Sign Up",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\": \"Viral\",\r\n    \"lastname\": \"Deshle\",\r\n    \"email\": \"viral.webosmotic@gmail.com\",\r\n    \"username\": \"dev_viral1\",\r\n    \"password\": \"12345678\",\r\n    \"isPrivate\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/sign-up",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"sign-up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"viral.webosmotic@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/login",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Post",
+			"item": [
+				{
+					"name": "Create Posts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "test_title",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "test description to test api",
+									"type": "text"
+								},
+								{
+									"key": "isPrivate",
+									"value": "false",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/home/webosmotic/Pictures/Screenshots/Screenshot from 2023-12-08 14-18-14.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseURL}}/posts/create-post",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"posts",
+								"create-post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get feed posts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/posts/get-feed-posts?page=1&perPage=20&search&isMyPostsOnly&isPrivate",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"posts",
+								"get-feed-posts"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "perPage",
+									"value": "20"
+								},
+								{
+									"key": "search",
+									"value": null
+								},
+								{
+									"key": "isMyPostsOnly",
+									"value": null
+								},
+								{
+									"key": "isPrivate",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Post Image",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/posts/get-feed-image?postId=65f3f668299fa9a4d47c2a2f",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"posts",
+								"get-feed-image"
+							],
+							"query": [
+								{
+									"key": "postId",
+									"value": "65f3f668299fa9a4d47c2a2f"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/users/get-user",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users",
+								"get-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/users/get-all-user",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users",
+								"get-all-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/users/get-users-profile?userId=65f3d37b0b4052407d567ca5",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users",
+								"get-users-profile"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "65f3d37b0b4052407d567ca5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstname\": \"Viral\",\n    \"lastname\": \"Deshle\",\n    \"username\": \"dev_viral1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/users/update-user",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users",
+								"update-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/users/delete-user",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users",
+								"delete-user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Server Root",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/delete-user?email=viral.webosmotic@gmail.com",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"delete-user"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "viral.webosmotic@gmail.com"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "http://localhost:5000",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
