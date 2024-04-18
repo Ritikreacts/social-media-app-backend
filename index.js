@@ -25,6 +25,8 @@ initDatabaseConnection();
 
 initSocketServer(server);
 
-server.listen(config.port, () => {
+const port = config.port || 3000;
+
+server.listen(port, () => {
   console.log(`Server listing at ${config.port}.`);
 });
