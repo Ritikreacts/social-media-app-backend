@@ -8,6 +8,7 @@ const {
 } = require("../utils/validations");
 const { getImageBase64 } = require("../utils/getImageData");
 const { eventEmitter } = require("../utils/socketServer");
+const { Types } = require("mongoose");
 
 const CREATE_POST_VALIDATION_SCHEMA = yup.object({
   filePath,
@@ -23,10 +24,14 @@ const createPost = async (req, res, next) => {
       userId: req.user._id,
       ...req.body,
     });
-    await eventEmitter("new-post", createdPost, createdPost.isPrivate);
+    const data = await postModal.findOne({ _id: createdPost._id }).populate({
+      path: "userId",
+      select: "firstname lastname username",
+    });
+    await eventEmitter("new-post", data, createdPost.isPrivate);
     return res.status(201).json({
       status: "success",
-      data: createdPost,
+      data: data,
     });
   } catch (e) {
     next(e);
@@ -47,9 +52,9 @@ const getFeedPost = async (req, res, next) => {
         $options: "i",
       };
     }
-    if (req.query.isMyPostsOnly) {
+    if (req.query.isMyPostsOnly && req.query.isMyPostsOnly === "true") {
       const userId = req.user._id;
-      searchQuery.userId = userId;
+      searchQuery.userId = new Types.ObjectId(userId);
     }
     if (req.query.isPrivate) {
       searchQuery.isPrivate = req.query.isPrivate == "true";
@@ -147,7 +152,7 @@ const getUsersPosts = async (req, res, next) => {
 const getImage = async (req, res, next) => {
   try {
     const { postId } = req.query;
-    if (!postId) {
+    if (!postId || postId === "undefined") {
       return res
         .status(400)
         .json({ status: "error", message: "Post Id not provided." });
@@ -175,6 +180,7 @@ const getImage = async (req, res, next) => {
     const base64 = await getImageBase64(post.filePath);
     return res.status(200).json({ status: "success", imageData: base64 });
   } catch (e) {
+    console.log(e);
     next(e);
   }
 };
