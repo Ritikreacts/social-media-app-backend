@@ -3,7 +3,7 @@ require("dotenv").config();
 const environment = process.env.ENVIRONMENT || "local";
 
 const local = {
-  baseURL: "http://localhost:5000/",
+  baseURL: "https://social-media-app-backend-rdyi.onrender.com",
   port: process.env.PORT || 5000,
   dbURL: process.env.DATABASE_URL || "",
   jwtSecret: process.env.JWT_SECRET || "superSecret",
